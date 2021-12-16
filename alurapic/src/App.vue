@@ -4,6 +4,10 @@
     <!-- Outra maneira de inserir textos dentro de uma tag: ' v-text="texto" ' -->
     <h1 class="titulo">{{ titulo }}</h1>
 
+    <!-- Usando a diretiva 'v-on:' para chamar o evento do input, para que toda vez que o evento for acionado, o elemeto filtro definido em data receba o valor digitado no input -->
+    <input type="search" class="filtro" placeholder="Filtre pelo titulo" v-on:input="filtro = $event.target.value">
+    {{ filtro }}
+
     <!-- Dentro de atributos não se pode usar interpolação, devo usar o v-bind antes do atributo, mas existe um atalho que é usar apenas ':' antes do atributo -->
     <ul class="lista-fotos">
 
@@ -40,7 +44,8 @@ export default {
 
     return {
       titulo: "Alurapic",
-      fotos: []
+      fotos: [],
+      filtro: ''
     };
   },
 
@@ -81,6 +86,11 @@ export default {
   }
 
   .imagem-responsiva {
+    width: 100%;
+  }
+
+  .filtro{
+    display: block;
     width: 100%;
   }
 </style>
