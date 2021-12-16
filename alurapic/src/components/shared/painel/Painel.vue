@@ -1,15 +1,27 @@
 <template>
         <div class="painel">
-          <h2 class="painel-titulo">{{ titulo }}</h2>
+            <!-- QUando eu clicar duas vezes no h2 abaio ele irá trocar o estado da propriedade visivael para seu oposto, para mostrar o painel ou ocultar -->
+            <!-- Usando o atalho de 'v-on:' que é usar '@' -->
+          <h2 class="painel-titulo" @dblclick="visivel = !visivel">{{ titulo }}</h2>
+
           <!-- Usando slot no lugar da div para dizer onde a imagem inserida dentro de 'meu-painel' será colocar aqui no componente Paiel -->
-          <slot class="painel-corpo"></slot>
+          <!-- Aplicando o v-show que faz com que o elemento ganhe um "display none", mas para isso o v-show tem que estar aplicado em uma div pai do slot -->
+          <div class="painel-corpo" v-show="visivel">
+              <slot></slot>
+          </div>
         </div>
 </template>
 
 <script>
 export default {
     //Com a propriedade props, eu informo para a aplicação os dados que ela aceita receber, esses dados informado no props podem ser interpolados
-    props: ['titulo']
+    props: ['titulo'],
+
+    data(){
+        return{
+            visivel: true //Criando a propriedade visivel para alterar o valor do campo
+        }
+    }
 
 };
 </script>
@@ -23,7 +35,6 @@ export default {
     margin: 5px;
     box-shadow: 5px 5px 10px grey;
     width: 200px;
-    height: 300px;
     vertical-align: top;
     text-align: center;
   }
@@ -44,5 +55,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center
+  }
+
+  .painel-titulo{
+    cursor: pointer;
+    user-select: none;
   }
 </style>
