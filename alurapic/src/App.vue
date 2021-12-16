@@ -13,7 +13,7 @@
 
       <!-- Usando a diretiva v-for para iterar um array, usando a ':key' para evitar o erro de sintaxe -->
       <!-- Os dados recebidos da API pela promessa do $http são iterados no li -->
-      <li class="lista-fotos-item" v-for="(foto, index) of fotos" :key="index">
+      <li class="lista-fotos-item" v-for="(foto, index) of fotosComFiltro" :key="index">
 
         <!-- Usado o compoente meu-painel que é importado -->
         <meu-painel :titulo="foto.titulo">
@@ -47,6 +47,17 @@ export default {
       fotos: [],
       filtro: ''
     };
+  },
+
+  //Criando uma computedPropets para executar uma lógica, ela cria propriedades com funçoes a serem executadas
+  computed: {
+    fotosComFiltro(){
+      if(this.filtro) { //Se existir algo digitado na propriedade filtro, faça
+        let exp = new RegExp(this.filtro.trim(), 'i') //Criando uma expressão regular para oque foi digitado usando o trim para remover os espaços em braco e definindo o i para ignorar se são letras maiusculas ou minusculas
+        return this.fotos.filter(foto => exp.test(foto.titulo)) //Retornando o resultado de um filtro do array de listas, com a filtragem de que se o titulo daquela foto for igual a expressão regular em exp ele me retorna
+      } else //Se não, se ela estiver em branco, faça
+        return this.fotos //Retorne a propriedade fotos, com o array com todos o dados das fotos
+    }
   },
 
   created() {
