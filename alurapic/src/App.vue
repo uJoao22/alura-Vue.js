@@ -1,13 +1,13 @@
 <template> <!-- Quando possuir mais de um elemento na tag template, devo envolve-los em uma div -->
-  <div>
+  <div class="corpo">
     <!-- Outra maneira de inserir textos dentro de uma tag: ' v-text="texto" ' -->
-    <h1>{{ titulo }}</h1>
+    <h1 class="centralizado">{{ titulo }}</h1>
 
     <!-- Dentro de atributos não se pode usar interpolação, devo usar o v-bind antes do atributo, mas existe um atalho que é usar apenas ':' antes do atributo -->
-    <ul>
+    <ul class="lista-fotos">
       <!-- Usando a diretiva v-for para iterar um array, usando a ':key' para evitar o erro de sintaxe -->
       <!-- Os dados recebidos da API pela promessa do $http são iterados no li -->
-      <li v-for="(foto, index) of fotos" :key="index">
+      <li class="lista-fotos-item" v-for="(foto, index) of fotos" :key="index">
         <img :src="foto.url" :alt="foto.titulo">
       </li>
     </ul>
@@ -41,5 +41,19 @@ export default {
 </script>
 
 <style>
+  .corpo{
+    font-family: Helvetica, sans-serif;
+    width: 96%;
+    margin: 0 auto;
+  }
 
+  .centralizado{
+    text-align: center;
+  }
+
+  .lista-fotos{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+  }
 </style>
