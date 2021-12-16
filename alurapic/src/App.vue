@@ -11,12 +11,10 @@
       <!-- Os dados recebidos da API pela promessa do $http são iterados no li -->
       <li class="lista-fotos-item" v-for="(foto, index) of fotos" :key="index">
 
-        <div class="painel">
-          <h2 class="painel-titulo">{{ foto.titulo }}</h2>
-          <div class="painel-corpo">
+        <!-- Usado o compoente meu-painel que é importado -->
+        <meu-painel :titulo="foto.titulo">
             <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo" />
-          </div>
-        </div>
+        </meu-painel>
 
       </li>
 
@@ -27,7 +25,16 @@
 </template>
 
 <script>
+//Importanndo o componente Painel
+import Painel from './components/shared/painel/Painel.vue'
+
 export default {
+
+  //Atribuindo aos componentes que Painel importado agora pode ser usado como 'meu-painel'
+  components: {
+    'meu-painel': Painel
+  },
+
   data() {
     //É na função data que fornecemos os dados que o template precisa
 
@@ -75,37 +82,5 @@ export default {
 
   .imagem-responsiva {
     width: 100%;
-  }
-
-  /* estilo do painel */
-
-   .painel {
-    padding: 0 auto;
-    border: solid 2px grey;
-    display: inline-block;
-    margin: 5px;
-    box-shadow: 5px 5px 10px grey;
-    width: 200px;
-    height: 300px;
-    vertical-align: top;
-    text-align: center;
-  }
-
-  .painel-corpo{
-    height: 230px;
-    display: flex;
-    align-items: center;
-  }
-
-  .painel .painel-titulo {
-    border: solid 2px;
-    background: lightblue;
-    margin: 0 0 0px 0;
-    padding: 10px;
-    height: 50px;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center
   }
 </style>
