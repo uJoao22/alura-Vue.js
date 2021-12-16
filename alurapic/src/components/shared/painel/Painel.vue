@@ -16,6 +16,7 @@
 </template>
 
 <script>
+
 export default {
     //Com a propriedade props, eu informo para a aplicação os dados que ela aceita receber, esses dados informado no props podem ser interpolados
     props: ['titulo'],
