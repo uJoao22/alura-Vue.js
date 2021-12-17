@@ -20,7 +20,8 @@
 
           <!-- Associando a diretiva meu-transform ao componente imagem-responsisva -->
           <!-- Usando o modificadore de diretiva .animate -->
-          <imagem-responsiva v-meu-transform.animate.reverse="45" :url="foto.url" :titulo="foto.titulo"/>
+          <!-- Passando argumentos para a diretiva, como o :rotate -->
+          <imagem-responsiva v-meu-transform:scale.animate="1.2" :url="foto.url" :titulo="foto.titulo"/>
 
           <!-- O evento botaoAtivado é chamado quando o método disparaAcao do componente Botao o chama através da função ativa o click, chamando usando o $emit -->
           <meu-botao
@@ -46,6 +47,8 @@
 import Painel from '../shared/painel/Painel.vue'
 import Imagem from '../shared/imagem-responsiva/ImagemResponsiva.vue'
 import Botao from '../shared/botao/Botao.vue'
+import transform from '../../directives/Transform';
+
 
 export default {
 
@@ -54,6 +57,10 @@ export default {
     'meu-painel': Painel,
     'imagem-responsiva': Imagem,
     'meu-botao': Botao
+  },
+
+  directives: {
+    'meu-transform': transform
   },
 
   data() {
