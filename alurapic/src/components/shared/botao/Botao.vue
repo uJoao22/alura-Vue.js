@@ -1,10 +1,18 @@
 <template>
-    <button :type="tipo" class="botao botao-perigo">{{ rotulo }}</button>
+    <!-- Quando eu clicar nesse botão ele chama o método disparaAcao -->
+    <button @click="disparaAcao()" :type="tipo" class="botao botao-perigo">{{ rotulo }}</button>
 </template>
 
 <script>
 export default {
-    props: ['tipo', 'rotulo']
+    props: ['tipo', 'rotulo'],
+
+    methods: {
+        disparaAcao(){
+            if(confirm("Confirma operação?")) //Se a operação for confirmada ele irá acionar o evento botaoAtivado usando o $emit
+                this.$emit('botaoAtivado')
+        }
+    }
 }
 </script>
 

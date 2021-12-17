@@ -18,8 +18,8 @@
         <!-- Usado o compoente meu-painel que é importado -->
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva :url="foto.url" :titulo="foto.titulo"/>
-          <!-- Usando o modificador de evento .native para que o componente aceite o evento click -->
-          <meu-botao tipo="button" rotulo="REMOVER" @click.native="remove(foto)"/>
+          <!-- O evento botaoAtivado é chamado quando o método disparaAcao do componente Botao o chama através da função ativa o click, chamando usando o $emit -->
+          <meu-botao tipo="button" rotulo="REMOVER" @botaoAtivado="remove(foto)"/>
         </meu-painel>
 
       </li>
@@ -68,8 +68,7 @@ export default {
 
   methods: { //Criando Métodos
     remove(foto){
-      if(confirm("Confirma operação?")) //Se  clicar em cofirmar,faça
-        alert("Remover a foto: "+foto.titulo)
+      alert("Remover a foto: "+foto.titulo)
     }
   },
 
