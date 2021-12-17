@@ -58,8 +58,10 @@ export default {
 
   methods: {
     grava(){
-        console.log(this.foto)
-        this.foto = new Foto()
+        //Enviando dados para API com o conceito REST usando o método POST
+        //Sintaxe: .post('para onde vai enviar os dados', os dados)
+        this.$http.post('http://localhost:3000/v1/fotos', this.foto)
+            .then(() => this.foto = new Foto(), err => console.log(err)) //Se tudo der certo, ele limpa o formulario, se der errado ele irá exibir o erro no console
     }
   }
 
