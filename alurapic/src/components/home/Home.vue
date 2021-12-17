@@ -18,7 +18,8 @@
         <!-- Usado o compoente meu-painel que é importado -->
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva :url="foto.url" :titulo="foto.titulo"/>
-          <meu-botao tipo="button" rotulo="REMOVER"/>
+          <!-- Usando o modificador de evento .native para que o componente aceite o evento click -->
+          <meu-botao tipo="button" rotulo="REMOVER" @click.native="remove(foto)"/>
         </meu-painel>
 
       </li>
@@ -62,6 +63,13 @@ export default {
         return this.fotos.filter(foto => exp.test(foto.titulo)) //Retornando o resultado de um filtro do array de listas, com a filtragem de que se o titulo daquela foto for igual a expressão regular em exp ele me retorna
       } else //Se não, se ela estiver em branco, faça
         return this.fotos //Retorne a propriedade fotos, com o array com todos o dados das fotos
+    }
+  },
+
+  methods: { //Criando Métodos
+    remove(foto){
+      if(confirm("Confirma operação?")) //Se  clicar em cofirmar,faça
+        alert("Remover a foto: "+foto.titulo)
     }
   },
 
