@@ -2,27 +2,29 @@
 
   <div>
     <h1 class="centralizado">Cadastro</h1>
-    <h2 class="centralizado"></h2>
+    <h2 class="centralizado">{{ foto.titulo }}</h2>
 
     <!-- Usando o modificador .prevent para cancelar o comportamento padrão do evento -->
+    <!-- Usando o v-model para fazer uma associação bidirecional, enviar e receber dados do data binding -->
     <form @submit.prevent="grava()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
         <input id="titulo" autocomplete="off"
-            @input="foto.titulo = $event.target.value" :value="foto.titulo">
+            v-model.lazy="foto.titulo">
       </div>
 
+        <!-- Usando o modificador .lazy para atualizar o valor digitado no input apenas quando sair do campo -->
       <div class="controle">
         <label for="url">URL</label>
         <input id="url" autocomplete="off"
-            @input="foto.url = $event.target.value" :value="foto.url">
-        <imagem-responsiva/>
+            v-model.lazy="foto.url">
+        <imagem-responsiva v-show="foto.url" :url="foto.url" :titulo="foto.titulo"/>
       </div>
 
       <div class="controle">
         <label for="descricao">DESCRIÇÃO</label>
         <textarea id="descricao" autocomplete="off"
-            @input="foto.descricao = $event.target.value" :value="foto.descricao">
+            v-model="foto.descricao">
         </textarea>
       </div>
 
