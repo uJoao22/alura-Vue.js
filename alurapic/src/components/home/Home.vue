@@ -17,8 +17,10 @@
 
         <!-- Usado o compoente meu-painel que é importado -->
         <meu-painel :titulo="foto.titulo">
+
           <!-- Associando a diretiva meu-transform ao componente imagem-responsisva -->
-          <imagem-responsiva v-meu-transform="{i: 45, an: true}" :url="foto.url" :titulo="foto.titulo"/>
+          <!-- Usando o modificadore de diretiva .animate -->
+          <imagem-responsiva v-meu-transform.animate.reverse="45" :url="foto.url" :titulo="foto.titulo"/>
 
           <!-- O evento botaoAtivado é chamado quando o método disparaAcao do componente Botao o chama através da função ativa o click, chamando usando o $emit -->
           <meu-botao

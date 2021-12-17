@@ -10,11 +10,14 @@ Vue.directive('meu-transform', { //No primeiro parametro declara o nome da diret
 
         //Toda vez que eu clicar duas vezez em algum dos elemento do el, ele executa a função
         el.addEventListener('dblclick', function() {
-            let i = binding.value ? binding.value.i : 90 //Se o binding.value estiver configurado ele recebe seu valor, se não 90
+            let i = binding.value || 90 //Se o binding.value estiver configurado ele recebe seu valor, se não 90
             current+=i //Toda vez que clicar duas vezes o currente recebe o valor dele mais o valor do binding ou 90
-            if(binding.value && binding.value.an == true)
+            if(binding.modifiers.animate)
                 el.style.transition = `transform 0.6s ease-in-out`
-            el.style.transform = `rotate(${current}deg)`
+            if(binding.modifiers.reverse)
+                el.style.transform = `rotate(-${current}deg)`
+            else
+                el.style.transform = `rotate(${current}deg)`
         })
     }
 
