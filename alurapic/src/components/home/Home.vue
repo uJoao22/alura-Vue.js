@@ -89,8 +89,11 @@ export default {
 
   methods: { //Criando Métodos
     remove(foto){
+
+      this.resource.delete({id: foto._id})
+
       //Executando o metodo DELETE para excluir dados da API que contenham determiado ID
-      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+      this.$http.delete(`v1/fotos/${foto._id}`)
         .then(() => {
             let i = this.fotos.indexOf(foto) //Pegando a posição o array em que a foto que será removida está
             this.fotos.splice(i,1) //Usando o splice para remover a foto do array
@@ -106,17 +109,13 @@ export default {
     //Usando da função created para eecutar um bloco de código toda vez que o componente é criado
     //O componente '$http' vem do modulo VueResource
     //Fazendo uma requisição dos dados do determinado endereço, essa requisição irá me retornar uma promise
-    let promise = this.$http.get("http://localhost:3000/v1/fotos");
-
     //Acessando os dados retornados pela promesa em caso de sucesso, convertendo os dados para JSON que me retorna uma promesa, e se essa promesa retornar sucesso, o array fotos criado em data recebe os dados da promesa, se der erro irá exibir o erro no connsole
-    promise
+    this.resource = this.$resource('v1/fotos')
+    this.resource.query() //O query realiza uma requisição get usado o endereço definido no resource
       .then(res => res.json())
-      .then(
-        fotos => (this.fotos = fotos),
-        err => console.log(err)
-      );
+      .then(fotos => (this.fotos = fotos),err => console.log(err))
   }
-};
+}
 </script>
 
 <style>
