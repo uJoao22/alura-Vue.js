@@ -4,6 +4,8 @@
     <!-- Outra maneira de inserir textos dentro de uma tag: ' v-text="texto" ' -->
     <h1 class="titulo">{{ titulo }}</h1>
 
+    <p v-show="mensagem" class="titulo">{{ mensagem }}</p>
+
     <!-- Usando a diretiva 'v-on:' ou seu atalho '@' para chamar o evento do input, para que toda vez que o evento for acionado, o elemeto filtro definido em data receba o valor digitado no input -->
     <input type="search" class="filtro" placeholder="Filtre pelo titulo" @input="filtro = $event.target.value">
     {{ filtro }}
@@ -69,7 +71,8 @@ export default {
     return {
       titulo: "Alurapic",
       fotos: [],
-      filtro: ''
+      filtro: '',
+      mensagem: ''
     };
   },
 
@@ -86,7 +89,12 @@ export default {
 
   methods: { //Criando Métodos
     remove(foto){
-      alert("Remover a foto: "+foto.titulo)
+      //Executando o metodo DELETE para excluir dados da API que contenham determiado ID
+      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+        .then(() => this.mensagem = "Foto removida com sucesso", err => {
+          cosole.log(err)
+          this.mensagem = "Não foi possível remover a foto"
+        })
     }
   },
 
