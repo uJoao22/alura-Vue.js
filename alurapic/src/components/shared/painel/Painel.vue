@@ -39,31 +39,31 @@ export default {
         margin: 5px;
         box-shadow: 5px 5px 10px grey;
         width: 200px;
+        height: 100%;
         vertical-align: top;
         text-align: center;
     }
 
     .painel-corpo{
         height: 230px;
-        display: flex;
-        align-items: center;
     }
 
     .painel .painel-titulo {
+        text-align: center;
         border: solid 2px;
         background: lightblue;
-        margin: 0 0 0px 0;
+        margin: 0;
         padding: 10px;
-        height: 50px;
         text-transform: uppercase;
-        display: flex;
-        justify-content: center;
-        align-items: center
     }
 
     .painel-titulo{
         cursor: pointer;
         user-select: none;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .painel-fade-enter, .painel-fade-leave-active{

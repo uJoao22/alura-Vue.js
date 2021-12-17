@@ -17,7 +17,8 @@
 
         <!-- Usado o compoente meu-painel que é importado -->
         <meu-painel :titulo="foto.titulo">
-          <imagem-responsiva :url="foto.url" :titulo="foto.titulo"></imagem-responsiva>
+          <imagem-responsiva :url="foto.url" :titulo="foto.titulo"/>
+          <meu-botao tipo="button" rotulo="REMOVER"/>
         </meu-painel>
 
       </li>
@@ -31,14 +32,16 @@
 <script>
 //Importando componentes
 import Painel from '../shared/painel/Painel.vue'
-import Imagem from '../shared/imagem-responsiva/ImagemResponsiva'
+import Imagem from '../shared/imagem-responsiva/ImagemResponsiva.vue'
+import Botao from '../shared/botao/Botao.vue'
 
 export default {
 
   //Atribuindo aos componentes que Painel importado agora pode ser usado como 'meu-painel'
   components: {
     'meu-painel': Painel,
-    'imagem-responsiva': Imagem
+    'imagem-responsiva': Imagem,
+    'meu-botao': Botao
   },
 
   data() {
