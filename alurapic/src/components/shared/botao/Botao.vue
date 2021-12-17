@@ -1,18 +1,34 @@
 <template>
     <!-- Quando eu clicar nesse botão ele chama o método disparaAcao -->
-    <button @click="disparaAcao()" :type="tipo" class="botao botao-perigo">{{ rotulo }}</button>
+    <!-- Atribuindo a class botao e a computedPropet estiloDoBotao -->
+    <button @click="disparaAcao()" :type="tipo" class="botao" :class="estiloDoBotao">{{ rotulo }}</button>
 </template>
 
 <script>
 export default {
-    props: ['tipo', 'rotulo'],
+    props: ['tipo', 'rotulo', 'confirmacao', 'estilo'],
 
     methods: {
         disparaAcao(){
-            if(confirm("Confirma operação?")) //Se a operação for confirmada ele irá acionar o evento botaoAtivado usando o $emit
-                this.$emit('botaoAtivado')
+            if(this.confirmacao ){ //Se precisar de confirmação, faça
+                if(confirm("Confirma operação?")) //Se a operação for confirmada ele irá acionar o evento botaoAtivado usando o $emit
+                    this.$emit('botaoAtivado')
+                return
+            }
+            this.$emit('botaoAtivado') //Se não precisar de confirmação, execute
+
+        }
+    },
+
+    computed: {
+        estiloDoBotao(){
+            if(this.estilo == "padrao" || this.estilo != "perigo") //Se estilo igual a padrão ou vazio, faça
+                return "botao-padrao"
+            if(this.estilo == "perigo") //Se estilo igual a perigo, faça
+                return "botao-perigo"
         }
     }
+
 }
 </script>
 

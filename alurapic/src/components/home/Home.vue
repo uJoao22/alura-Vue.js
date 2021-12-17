@@ -18,8 +18,16 @@
         <!-- Usado o compoente meu-painel que é importado -->
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva :url="foto.url" :titulo="foto.titulo"/>
+
           <!-- O evento botaoAtivado é chamado quando o método disparaAcao do componente Botao o chama através da função ativa o click, chamando usando o $emit -->
-          <meu-botao tipo="button" rotulo="REMOVER" @botaoAtivado="remove(foto)"/>
+          <meu-botao
+            tipo="button"
+            rotulo="REMOVER"
+            @botaoAtivado="remove(foto)"
+            :confirmacao="true"
+            estilo="perigo"
+          />
+
         </meu-painel>
 
       </li>
