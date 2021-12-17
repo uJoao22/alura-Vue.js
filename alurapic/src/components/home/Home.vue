@@ -91,9 +91,13 @@ export default {
     remove(foto){
       //Executando o metodo DELETE para excluir dados da API que contenham determiado ID
       this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`)
-        .then(() => this.mensagem = "Foto removida com sucesso", err => {
-          cosole.log(err)
-          this.mensagem = "Não foi possível remover a foto"
+        .then(() => {
+            let i = this.fotos.indexOf(foto) //Pegando a posição o array em que a foto que será removida está
+            this.fotos.splice(i,1) //Usando o splice para remover a foto do array
+            this.mensagem = "Foto removida com sucesso"
+          }, err => {
+            cosole.log(err)
+            this.mensagem = "Não foi possível remover a foto"
         })
     }
   },
