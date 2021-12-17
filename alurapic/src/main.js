@@ -6,6 +6,8 @@ import VueRouter from 'vue-router' //Importando o modulo Vue-Router
 
 import { routes } from './routes'
 
+import './directives/Transform' //Fazendo com que a diretiva Transform seja carregada
+
 Vue.use(VueResource) //Registrando o VueResource usando o Global Viw Object
 Vue.use(VueRouter) //Registrando o VueRouter usando o Global View Object
 
