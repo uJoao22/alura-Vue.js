@@ -1,4 +1,5 @@
 import Cadastro from './components/cadastro/Cadastro.vue'
+// const Cadastro = () => System.import('./components/cadastro/Cadastro.vue') - Código para fazer o Code splitting e lazy loading, mas não funcionou
 import Home from './components/home/Home.vue'
 
 export const routes = [
