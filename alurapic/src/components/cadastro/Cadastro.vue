@@ -15,15 +15,20 @@
     <form @submit.prevent="grava()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" autocomplete="off"
+
+        <!-- Usando o VeeValidate, dizendo que o campo é obrigatorio, que o minimo de caracteres é 3 e o maximo é 30 -->
+        <input data-vv-as="título" name="titulo" v-validate data-vv-rules="required|min:3|max:30" id="titulo" autocomplete="off"
             v-model.lazy="foto.titulo">
+        <!-- Errors, tem problema no titulo? Se sim me mostra a mensagem de erro, se não prossiga -->
+        <span class="erro" v-show="errors.has('titulo')">{{ errors.first('titulo') }}</span>
       </div>
 
         <!-- Usando o modificador .lazy para atualizar o valor digitado no input apenas quando sair do campo -->
       <div class="controle">
         <label for="url">URL</label>
-        <input id="url" autocomplete="off"
+        <input name="url" v-validate data-vv-rules="required" id="url" autocomplete="off"
             v-model.lazy="foto.url">
+        <span class="erro"  v-show="errors.has('url')">{{ errors.first('url') }}</span>
         <imagem-responsiva v-show="foto.url" :url="foto.url" :titulo="foto.titulo"/>
       </div>
 
@@ -67,13 +72,17 @@ export default {
 
   methods: {
     grava(){
-        this.service.cadastra(this.foto) //Chamando o método cadastra que irá me retornar uma promesa que os dados serão inseridos
-          .then(() => {
-            if(this.id)
-              //O router é aquele que navega entre as rotas
-              this.$router.push({name: 'home'}) //Usando o $router para navegar para a rota home
-            this.foto = new Foto()
-          }, err => console.log(err)) //Se tudo der certo, ele limpa o formulario, se der errado ele irá exibir o erro no console
+      this.$validator.validateAll().then(success => {
+        if(success) {
+          this.service.cadastra(this.foto) //Chamando o método cadastra que irá me retornar uma promesa que os dados serão inseridos
+            .then(() => {
+              if(this.id)
+                //O router é aquele que navega entre as rotas
+                this.$router.push({name: 'home'}) //Usando o $router para navegar para a rota home
+              this.foto = new Foto()
+            }, err => console.log(err)) //Se tudo der certo, ele limpa o formulario, se der errado ele irá exibir o erro no console
+        }
+      })
     }
   },
 
@@ -111,6 +120,10 @@ export default {
 
   .centralizado {
     text-align: center;
+  }
+
+  .erro{
+    color: red
   }
 
 </style>

@@ -1,11 +1,9 @@
 import Vue from 'vue' //Importando o Global View Object
 import App from './App.vue'
-
 import VueResource from 'vue-resource' //Importando o modulo Vue-resource
 import VueRouter from 'vue-router' //Importando o modulo Vue-Router
-
+import VeeValidate from 'vee-validate' //IMportando o modulo Vee-Validade
 import { routes } from './routes'
-
 import './directives/Transform' //Fazendo com que a diretiva Transform seja carregada
 
 Vue.use(VueResource) //Registrando o VueResource usando o Global Viw Object
@@ -16,6 +14,8 @@ const router = new VueRouter({ //Instanciando a VueRouter
   routes: routes, //E passando para ele um objeto JS com a propriedade routes
   mode: 'history' //Aplicando para remover a # da url
 })
+
+Vue.use(VeeValidate) //Registrando o VeeValidade usando o Global View Object
 
 new Vue({ //Instancia de global view object
   el: '#app',
