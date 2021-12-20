@@ -5,7 +5,8 @@ import VueRouter from 'vue-router' //Importando o modulo Vue-Router
 import { routes } from './routes'
 import './directives/Transform' //Fazendo com que a diretiva Transform seja carregada
 import VeeValidate, {Validator} from 'vee-validate' //IMportando o modulo Vee-Validade
-import msg from './pt_BR';
+import msg from './pt_BR'
+import 'bootstrap/dist/css/bootstrap.css' //Fazendo com que o Bootstrap seja carregado
 
 Vue.use(VueResource) //Registrando o VueResource usando o Global Viw Object
 Vue.http.options.root = "http://localhost:3000"
