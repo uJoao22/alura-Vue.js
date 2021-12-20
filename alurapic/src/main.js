@@ -2,9 +2,10 @@ import Vue from 'vue' //Importando o Global View Object
 import App from './App.vue'
 import VueResource from 'vue-resource' //Importando o modulo Vue-resource
 import VueRouter from 'vue-router' //Importando o modulo Vue-Router
-import VeeValidate from 'vee-validate' //IMportando o modulo Vee-Validade
 import { routes } from './routes'
 import './directives/Transform' //Fazendo com que a diretiva Transform seja carregada
+import VeeValidate, {Validator} from 'vee-validate' //IMportando o modulo Vee-Validade
+import msg from './pt_BR';
 
 Vue.use(VueResource) //Registrando o VueResource usando o Global Viw Object
 Vue.http.options.root = "http://localhost:3000"
@@ -15,7 +16,8 @@ const router = new VueRouter({ //Instanciando a VueRouter
   mode: 'history' //Aplicando para remover a # da url
 })
 
-Vue.use(VeeValidate) //Registrando o VeeValidade usando o Global View Object
+Validator.localize({ pt_BR: msg })
+Vue.use(VeeValidate, {locale: 'pt_BR'}) //Registrando o VeeValidade usando o Global View Object e definindo o idioma como pt_BR
 
 new Vue({ //Instancia de global view object
   el: '#app',
