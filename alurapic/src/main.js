@@ -7,6 +7,10 @@ import './directives/Transform' //Fazendo com que a diretiva Transform seja carr
 import VeeValidate, {Validator} from 'vee-validate' //IMportando o modulo Vee-Validade
 import msg from './pt_BR'
 import 'bootstrap/dist/css/bootstrap.css' //Fazendo com que o Bootstrap seja carregado
+import './assets/css/teste.css'
+import './assets/js/teste.js'
+// import 'jquery/dist/jquery.js'
+// import 'bootstrap/dist/js/bootstrap.js'
 
 Vue.use(VueResource) //Registrando o VueResource usando o Global Viw Object
 Vue.http.options.root = "http://localhost:3000"

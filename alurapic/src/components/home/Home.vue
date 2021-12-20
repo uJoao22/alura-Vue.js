@@ -1,6 +1,9 @@
 <template>
   <!-- Quando possuir mais de um elemento na tag template, devo envolve-los em uma div -->
   <div>
+    <!-- Inserindo imagem locais no projeto -->
+    <!-- <img src="/static/teste.png"> -->
+
     <!-- Outra maneira de inserir textos dentro de uma tag: ' v-text="texto" ' -->
     <h1 class="titulo">{{ titulo }}</h1>
 
