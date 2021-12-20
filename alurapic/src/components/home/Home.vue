@@ -50,6 +50,7 @@ import Painel from '../shared/painel/Painel.vue'
 import Imagem from '../shared/imagem-responsiva/ImagemResponsiva.vue'
 import Botao from '../shared/botao/Botao.vue'
 import transform from '../../directives/Transform';
+import FotoService from '../../domain/foto/FotoService'
 
 
 export default {
@@ -89,9 +90,8 @@ export default {
 
   methods: { //Criando Métodos
     remove(foto){
-
-      //Usando o delete na propriedade resource, passando para ele um objeto JS com o valor da propriedade que será recebida no parametro da URL para excluir a foto correta na API
-      this.resource.delete({id: foto._id})
+      //Chamando o método apaga, passando para ele um o id da fotoo como valor da propriedade que será recebida no parametro da URL para excluir a foto correta na API
+      this.service.apaga(foto._id)
         .then(() => {
           let i = this.fotos.indexOf(foto) //Pegando a posição o array em que a foto que será removida está
           this.fotos.splice(i,1) //Usando o splice para remover a foto do array
@@ -103,16 +103,11 @@ export default {
     }
   },
 
-  created() {
-    //Usando da função created para executar um bloco de código toda vez que o componente é criado
-    //Fazendo uma requisição dos dados do determinado endereço, essa requisição irá me retornar uma promise
-    //Acessando os dados retornados pela promesa em caso de sucesso, convertendo os dados para JSON que me retorna uma promesa, e se essa promesa retornar sucesso, o array fotos criado em data recebe os dados da promesa, se der erro irá exibir o erro no connsole
+  created() { //Usando da função created para executar um bloco de código toda vez que o componente é criado
+    this.service = new FotoService(this.$resource) //Instanciando FotoService e passando como parametro a propriedade this.$resource
 
-    this.resource = this.$resource('v1/fotos{/id}') //Definindo o resource como uma propriedade para ser acessivel em outras partes do código, e passando como parametro o id da foto
-
-    this.resource.query() //O query realiza uma requisição get usado o endereço definido no resource
-      .then(res => res.json())
-      .then(fotos => (this.fotos = fotos),err => console.log(err))
+    this.service.lista() //Chamando o método lista da class FotoService
+      .then(fotos => (this.fotos = fotos),err => console.log(err)) //Se retornar sucesso, ele irá inserir os dados da API na propriedade fotos, se der erro irá logar a mensagem de erro
   }
 }
 </script>

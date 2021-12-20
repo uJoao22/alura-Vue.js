@@ -42,6 +42,7 @@
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
 import Botao from '../shared/botao/Botao.vue';
 import Foto from '../../domain/foto/Foto'
+import FotoService from '../../domain/foto/FotoService'
 
 export default {
 
@@ -58,16 +59,13 @@ export default {
 
   methods: {
     grava(){
-        //Enviando dados para API com o conceito REST usando o método POST
-        //Sintaxe: .post('para onde vai enviar os dados', os dados)
-
-        this.resource.save(this.foto)  //Usando o save para inserir itens na API, funciona como o POST
+        this.service.cadastra(this.foto) //Chamando o método cadastra que irá me retornar uma promesa que os dados serão inseridos
           .then(() => this.foto = new Foto(), err => console.log(err)) //Se tudo der certo, ele limpa o formulario, se der errado ele irá exibir o erro no console
     }
   },
 
-  created(){ //Usando da função created para criar a proopriedade resource com a url da API toda vez que um componente é criado, carregado
-    this.resource = this.$resource('v1/fotos')
+  created(){ //Instanciando a class FotoService passando como parametro a propriedade this.$resource
+    this.service = new FotoService(this.$resource)
   }
 
 }
