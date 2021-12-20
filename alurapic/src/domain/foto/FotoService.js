@@ -9,11 +9,15 @@ export default class FotoService{
     }
 
     cadastra(foto){
-        return this._resource.save(foto) //
+        return this._resource.save(foto) //A função save recebe os dados da foto como parametro e insere elas na API
     }
 
     apaga(id){
         // A função delete recebe como parametro o id da foto que será usado para apagar a foto na API e retorna um promesa que a foto será excluida
         return this._resource.delete({id: id})
+    }
+
+    busca(id){
+        return this._resource.get({ id }).then(res => res.json()) //Executando uma ação do tipo get para me retornar o item na API que possui o mesmo id informado no parametro do get
     }
 }

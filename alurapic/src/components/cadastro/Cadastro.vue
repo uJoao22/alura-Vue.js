@@ -54,7 +54,8 @@ export default {
 
   data(){
     return{
-        foto: new Foto()
+        foto: new Foto(),
+        id: this.$route.params.id //Definindo o valor da propriedade com o valor do parametro que foi passado na url
     }
   },
 
@@ -67,6 +68,10 @@ export default {
 
   created(){ //Instanciando a class FotoService passando como parametro a propriedade this.$resource
     this.service = new FotoService(this.$resource)
+
+    if(this.id){ //Se tiver sido passado um parametro id na URL, faça
+      this.service.busca(this.id).then(foto => this.foto = foto) //Executando o método busca, passando o id da url como parametro, ele me retorna uma promesa, se for sucesso, this.foto recebe os dados retornado pela API
+    }
   }
 
 }
