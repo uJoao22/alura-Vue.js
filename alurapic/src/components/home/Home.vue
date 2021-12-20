@@ -90,27 +90,26 @@ export default {
   methods: { //Criando Métodos
     remove(foto){
 
+      //Usando o delete na propriedade resource, passando para ele um objeto JS com o valor da propriedade que será recebida no parametro da URL para excluir a foto correta na API
       this.resource.delete({id: foto._id})
-
-      //Executando o metodo DELETE para excluir dados da API que contenham determiado ID
-      this.$http.delete(`v1/fotos/${foto._id}`)
         .then(() => {
-            let i = this.fotos.indexOf(foto) //Pegando a posição o array em que a foto que será removida está
-            this.fotos.splice(i,1) //Usando o splice para remover a foto do array
-            this.mensagem = "Foto removida com sucesso"
-          }, err => {
-            cosole.log(err)
-            this.mensagem = "Não foi possível remover a foto"
-        })
+          let i = this.fotos.indexOf(foto) //Pegando a posição o array em que a foto que será removida está
+          this.fotos.splice(i,1) //Usando o splice para remover a foto do array
+          this.mensagem = "Foto removida com sucesso"
+        }, err => {
+          cosole.log(err)
+          this.mensagem = "Não foi possível remover a foto"
+      })
     }
   },
 
   created() {
-    //Usando da função created para eecutar um bloco de código toda vez que o componente é criado
-    //O componente '$http' vem do modulo VueResource
+    //Usando da função created para executar um bloco de código toda vez que o componente é criado
     //Fazendo uma requisição dos dados do determinado endereço, essa requisição irá me retornar uma promise
     //Acessando os dados retornados pela promesa em caso de sucesso, convertendo os dados para JSON que me retorna uma promesa, e se essa promesa retornar sucesso, o array fotos criado em data recebe os dados da promesa, se der erro irá exibir o erro no connsole
-    this.resource = this.$resource('v1/fotos')
+
+    this.resource = this.$resource('v1/fotos{/id}') //Definindo o resource como uma propriedade para ser acessivel em outras partes do código, e passando como parametro o id da foto
+
     this.resource.query() //O query realiza uma requisição get usado o endereço definido no resource
       .then(res => res.json())
       .then(fotos => (this.fotos = fotos),err => console.log(err))

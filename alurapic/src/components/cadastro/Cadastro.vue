@@ -60,9 +60,14 @@ export default {
     grava(){
         //Enviando dados para API com o conceito REST usando o método POST
         //Sintaxe: .post('para onde vai enviar os dados', os dados)
-        this.$http.post('v1/fotos', this.foto)
-            .then(() => this.foto = new Foto(), err => console.log(err)) //Se tudo der certo, ele limpa o formulario, se der errado ele irá exibir o erro no console
+
+        this.resource.save(this.foto)  //Usando o save para inserir itens na API, funciona como o POST
+          .then(() => this.foto = new Foto(), err => console.log(err)) //Se tudo der certo, ele limpa o formulario, se der errado ele irá exibir o erro no console
     }
+  },
+
+  created(){ //Usando da função created para criar a proopriedade resource com a url da API toda vez que um componente é criado, carregado
+    this.resource = this.$resource('v1/fotos')
   }
 
 }

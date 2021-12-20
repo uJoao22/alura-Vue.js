@@ -45,7 +45,6 @@ export default {
     }
 
     .painel-corpo{
-        height: 230px;
         overflow: hidden;
     }
 
