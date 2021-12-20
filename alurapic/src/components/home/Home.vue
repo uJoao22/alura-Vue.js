@@ -25,6 +25,11 @@
           <!-- Passando argumentos para a diretiva, como o :rotate -->
           <imagem-responsiva v-meu-transform:scale.animate="1.2" :url="foto.url" :titulo="foto.titulo"/>
 
+          <!-- Enviando o parametro id para a rota cadastro, usando o params -->
+          <router-link :to="{ name: 'altera', params: { id: foto._id } }">
+            <meu-botao tipo="button" rotulo="ALTERAR"/>
+          </router-link>
+
           <!-- O evento botaoAtivado é chamado quando o método disparaAcao do componente Botao o chama através da função ativa o click, chamando usando o $emit -->
           <meu-botao
             tipo="button"
