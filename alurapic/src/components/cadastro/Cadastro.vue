@@ -2,6 +2,12 @@
 
   <div>
     <h1 class="centralizado">Cadastro</h1>
+
+    <!-- Usando a diretiva v-if para expresar um condição para tag ser mostrada -->
+    <h2 v-if="foto._id" class="centralizado">Alterando</h2>
+    <!-- Usando o v-else para executar o que não entrou na condição acima -->
+    <h2 v-else class="centralizado">Incluindo</h2>
+
     <h2 class="centralizado">{{ foto.titulo }}</h2>
 
     <!-- Usando o modificador .prevent para cancelar o comportamento padrão do evento -->
@@ -62,7 +68,12 @@ export default {
   methods: {
     grava(){
         this.service.cadastra(this.foto) //Chamando o método cadastra que irá me retornar uma promesa que os dados serão inseridos
-          .then(() => this.foto = new Foto(), err => console.log(err)) //Se tudo der certo, ele limpa o formulario, se der errado ele irá exibir o erro no console
+          .then(() => {
+            if(this.id)
+              //O router é aquele que navega entre as rotas
+              this.$router.push({name: 'home'}) //Usando o $router para navegar para a rota home
+            this.foto = new Foto()
+          }, err => console.log(err)) //Se tudo der certo, ele limpa o formulario, se der errado ele irá exibir o erro no console
     }
   },
 

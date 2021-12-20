@@ -9,7 +9,11 @@ export default class FotoService{
     }
 
     cadastra(foto){
-        return this._resource.save(foto) //A função save recebe os dados da foto como parametro e insere elas na API
+
+        if(foto._id)
+            return this._resource.update({id: foto._id}, foto) //O update atualiza os dados da API, recebendo como primeiro parametro o id da foto que será alterada, e como segundo, recebe os dados que serão alterados
+        else
+            return this._resource.save(foto) //A função save recebe os dados da foto como parametro e insere elas na API
     }
 
     apaga(id){
