@@ -112,7 +112,7 @@ export default {
     this.service = new FotoService(this.$resource) //Instanciando FotoService e passando como parametro a propriedade this.$resource
 
     this.service.lista() //Chamando o método lista da class FotoService
-      .then(fotos => (this.fotos = fotos),err => console.log(err)) //Se retornar sucesso, ele irá inserir os dados da API na propriedade fotos, se der erro irá logar a mensagem de erro
+      .then(fotos => (this.fotos = fotos),err => this.mensagem = err.message) //Se retornar sucesso, ele irá inserir os dados da API na propriedade fotos, se der erro irá logar a mensagem de erro
   }
 }
 </script>

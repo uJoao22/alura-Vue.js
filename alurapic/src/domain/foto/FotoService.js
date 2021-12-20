@@ -5,7 +5,10 @@ export default class FotoService{
 
     lista(){
         //A função query busca os dado na API e retorna uma promesa, se os dados forem retornados com sucesso, eles serão convertidos para JSON e retornaram outra promesa quando o método for chamado
-        return this._resource.query().then(res => res.json())
+        return this._resource.query().then(res => res.json(), err => {
+            console.log(err)
+            throw new Error("Não foi possível obter as fotos. Tente mais tarde")
+        })
     }
 
     cadastra(foto){
@@ -19,6 +22,10 @@ export default class FotoService{
     apaga(id){
         // A função delete recebe como parametro o id da foto que será usado para apagar a foto na API e retorna um promesa que a foto será excluida
         return this._resource.delete({id: id})
+            .then(null, err => { //O delete não me retorna nada no then, então defino null, mas pode me dar erro
+                console.log(err)
+                throw new Error("Não foi possível remover a foto")
+            })
     }
 
     busca(id){
